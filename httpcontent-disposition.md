@@ -50,7 +50,15 @@ Content-Disposition: attachment;
                      
 ```
 
-<pre>对于较新的 Firefox 、 Chrome 、 Opera 、 Safari 等浏览器，都支持并会使用新标准规定的 filename* ，即使它们不会自动解码 filename 也无所谓了；而对于旧版本的IE浏览器，它们无法识别 filename* ，会将其自动忽略并使用旧的 filename（唯一的小瑕疵是必须要有一个英文后缀名）。这样一来就完美解决了多浏览器的多语言兼容问题，既不需要 UA 判断，也较为符合标准。
+
+```
+对于较新的 Firefox 、 Chrome 、 Opera 、 Safari 等浏览器，都支持并会使用新标准规定的 filename* ，即使它们不会自动解码 filename 也无所谓了；而对于旧版本的IE浏览器，它们无法识别 filename* ，会将其自动忽略并使用旧的 filename（唯一的小瑕疵是必须要有一个英文后缀名）。这样一来就完美解决了多浏览器的多语言兼容问题，既不需要 UA 判断，也较为符合标准。
+
+```
+
+
+
+
 
 
 
