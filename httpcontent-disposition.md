@@ -6,10 +6,16 @@
 
 
 ``` java
-一开始，我的代码是：
-     response.setHeader("Content-Disposition", "attachment;filename=\"" + URLEncoder.encode(fileName +".pdf", "UTF-8") + "\";filename*=utf-8\'\'" +URLEncoder.encode(fileName +".pdf", "UTF-8"));
+一开始，我的代码是这样的，文件后缀是pdf：
+     response.setHeader("Content-Disposition", "attachment;filename=\"" + URLEncoder.encode(fileName +".pdf", "UTF-8"));
      response.setHeader("Content-Type", "application/pdf");
      response.setHeader("Content-Length", pdfOutputStream.size()+"");
 ```
+
+>上面的头部配置出现的问题是，文件在fixfox下载时文件名是未进行decode的一堆乱七八糟的文字。
+
+
+
+
 
 
