@@ -15,3 +15,7 @@
 * [FileSystem](filesystem.md)
   * [rootfs](filesystem/rootfs.md)
 
+## db
+
+* [TEXT字段拆分出去成独立的表](db/text.md)
+
