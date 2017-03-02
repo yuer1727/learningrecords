@@ -17,5 +17,7 @@
 
 ## db
 
+* 常见问题
+  * [Text字段拆分出 去成独立的表](db/text.md)
 * [TEXT字段拆分出去成独立的表](db/text.md)
 
