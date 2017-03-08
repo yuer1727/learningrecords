@@ -12,6 +12,22 @@
 
 ####Itoo-base-parent(pom.xml)
 ```
-     
+<dependencyManagement>  
+          
+        <dependencies>  
+            <dependency>  
+                <groupId>org.eclipse.persistence</groupId>  
+                <artifactId>org.eclipse.persistence.jpa</artifactId>  
+                <version>${org.eclipse.persistence.jpa.version}</version>  
+                <scope>provided</scope>  
+            </dependency>  
+              
+            <dependency>  
+                <groupId>javax</groupId>  
+                <artifactId>javaee-api</artifactId>  
+                <version>${javaee-api.version}</version>  
+            </dependency>  
+        </dependencies>  
+    </dependencyManagement>  
 ```
 
