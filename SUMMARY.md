@@ -20,3 +20,8 @@
 * 常见问题
   * [Text字段拆分出 去成独立的表](db/text.md)
 
+## maven
+
+* [pom.xml](maven/pom.xml.md)
+  * [pom.xml\_\_DepencyManagement\_\_Dependencies](maven/pom.xml/pom.xml__depencymanagement__dependencies.md)
+
