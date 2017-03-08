@@ -71,7 +71,7 @@
 
 
 ###2、Dependencies
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们的项目模块很多的时候，我们使用Maven管理项目非常方便，帮助我们管理构建、文档、报告、依赖、scms、发布、分发的方法。可以方便的编译代码、进行依赖管理、管理二进制库等等。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相对于dependencyManagement，所有生命在dependencies里的依赖都会自动引入，并默认被所有的子项目继承。
 
 
 
