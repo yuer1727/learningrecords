@@ -13,7 +13,6 @@
 ####Itoo-base-parent(pom.xml)
 ```
 <dependencyManagement>  
-          
         <dependencies>  
             <dependency>  
                 <groupId>org.eclipse.persistence</groupId>  
