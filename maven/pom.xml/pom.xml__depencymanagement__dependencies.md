@@ -30,3 +30,75 @@
     </dependencyManagement>  
 ```
 
+
+####Itoo-base(pom.xml)
+```
+<!--继承父类-->  
+<project>
+    <parent>  
+        <artifactId>itoo-base-parent</artifactId>  
+        <groupId>com.tgb</groupId>  
+  
+        <version>0.0.1-SNAPSHOT</version>  
+        <relativePath>../itoo-base-parent/pom.xml</relativePath>  
+    </parent>  
+        <modelVersion>4.0.0</modelVersion>  
+        <artifactId>itoo-base</artifactId>  
+        <packaging>ejb</packaging>  
+          
+    <!--依赖关系-->  
+    <dependencies>  
+        <dependency>  
+            <groupId>javax</groupId>  
+            <artifactId>javaee-api</artifactId>  
+        </dependency>  
+          
+        <dependency>  
+            <groupId>com.fasterxml.jackson.core</groupId>  
+            <artifactId>jackson-annotations</artifactId>  
+        </dependency>  
+          
+        <dependency>  
+            <groupId>org.eclipse.persistence</groupId>  
+            <artifactId>org.eclipse.persistence.jpa</artifactId>  
+            <scope>provided</scope>  
+        </dependency>  
+    </dependencies>  
+</project>  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
