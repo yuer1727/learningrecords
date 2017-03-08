@@ -24,4 +24,5 @@
 
 * [pom.xml](maven/pom.xml.md)
   * [pom.xml\_\_DepencyManagement\_\_Dependencies](maven/pom.xml/pom.xml__depencymanagement__dependencies.md)
+  * [maven命令](maven/pom.xml/maven.md)
 
