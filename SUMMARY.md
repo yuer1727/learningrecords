@@ -28,6 +28,5 @@
 
 ## zookeeper
 
-* [demo](zookeeper/demo.md)
-  * [demo入门](zookeeper/demo/.md)
+* [入门demo](zookeeper/demo.md)
 
