@@ -31,21 +31,80 @@ server.3=127.0.0.1:2890:3890
 
 那么，首先我们随便打个命令，因为zookeeper不认识，他会给出命令的help,如下图  
 ![](/assets/dddd.jpg)
+>ls(查看当前节点数据),
+ls2(查看当前节点数据并能看到更新次数等数据) ,
+create(创建一个节点) ,
+get(得到一个节点，包含数据和更新次数等数据),
+set(修改节点)
+delete(删除一个节点)
+
+通过上述命令实践，我们可以发现，zookeeper使用了一个类似文件系统的树结构，数据可以挂在某个节点上，可以对这个节点进行删改。另外我们还发现，当改动一个节点的时候，集群中活着的机器都会更新到一致的数据。 
+
+#zookeeper的数据模型
+在简单使用了zookeeper之后，我们发现其数据模型有些像操作系统的文件结构，结构如下图所示
+![](/assets/XX.jpg)
+
+(1)     每个节点在zookeeper中叫做znode,并且其有一个唯一的路径标识，如/SERVER2节点的标识就为/APP3/SERVER2
+(2)     Znode可以有子znode，并且znode里可以存数据，但是EPHEMERAL类型的节点不能有子节点
+(3)     Znode中的数据可以有多个版本，比如某一个路径下存有多个数据版本，那么查询这个路径下的数据就需要带上版本。
+(4)     znode 可以是临时节点，一旦创建这个 znode 的客户端与服务器失去联系，这个 znode 也将自动删除，Zookeeper 的客户端和服务器通信采用长连接方式，每个客户端和  服务器通过心跳来保持连接，这个连接状态称为 session，如果 znode 是临时节点，这个 session 失效，znode 也就删除了
+(5)     znode 的目录名可以自动编号，如 App1 已经存在，再创建的话，将会自动命名为 App2 
+(6)     znode 可以被监控，包括这个目录节点中存储的数据的修改，子节点目录的变化等，一旦变化可以通知设置监控的客户端，这个功能是zookeeper对于应用最重要的特性，通过这个特性可以实现的功能包括配置的集中管理，集群管理，分布式锁等等。  
 
 
+#通过java代码使用zookeeper 
+Zookeeper的使用主要是通过创建其jar包下的Zookeeper实例，并且调用其接口方法进行的，主要的操作就是对znode的增删改操作，监听znode的变化以及处理。 
 
+以下为主要的API使用和解释
+```
+//创建一个Zookeeper实例，第一个参数为目标服务器地址和端口，第二个参数为Session超时时间，第三个为节点变化时的回调方法
+ZooKeeper zk = new ZooKeeper("127.0.0.1:2181", 500000,new Watcher() {
+           // 监控所有被触发的事件
+             public void process(WatchedEvent event) {
+           //dosomething
+           }
+      });
+//创建一个节点root，数据是mydata,不进行ACL权限控制，节点为永久性的(即客户端shutdown了也不会消失)
+zk.create("/root", "mydata".getBytes(),Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 
+//在root下面创建一个childone znode,数据为childone,不进行ACL权限控制，节点为永久性的
+zk.create("/root/childone","childone".getBytes(), Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
 
+//取得/root节点下的子节点名称,返回List<String>
+zk.getChildren("/root",true);
 
+//取得/root/childone节点下的数据,返回byte[]
+zk.getData("/root/childone", true, null);
 
+//修改节点/root/childone下的数据，第三个参数为版本，如果是-1，那会无视被修改的数据版本，直接改掉
+zk.setData("/root/childone","childonemodify".getBytes(), -1);
 
+//删除/root/childone这个节点，第二个参数为版本，－1的话直接删除，无视版本
+zk.delete("/root/childone", -1);
+      
+//关闭session
+zk.close();
+```
 
+#Zookeeper的主流应用场景实现思路（除去官方示例） 
+* 分布式应用配置管理
+![](/assets/1.png)
 
+* 分布式应用集群管理
+Applicaion Server启动时与zookeepr建立会话创建EPHEMERAL节点，Applicaion Server停止时会话终止的时候，EPHEMERAL节点被删除。
 
+![](/assets/2.png)
 
+* 分布式锁
 
+核心依赖：利用zookeeper对znode节点操作的原子性
 
+zookeeper分布式锁实现算法:
 
-
-
-
+调用 create( )，参数 pathname 为 "locknode/lock-"，并设置 sequence和 ephemeral 标志。
+在所节点（lock node）上调用 getChildren( ) ，不需要设置监视标志。
+如果在第 1 步中创建的节点的路径具有最小的序号后缀，那么该客户端就获得了锁。
+客户端调用 exists( ) ，并在锁目录路径中前一个最小序号的节点上设置监视标志。
+如果 exists( ) 返回 false，跳转至第 2 步，否则，在跳转至第 2 步之前等待前一步路径上节点的通知消息。
+示例：多个进程互斥访问某个文件
+![](/assets/3.png)
