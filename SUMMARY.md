@@ -26,6 +26,10 @@
   * [pom.xml\_\_DepencyManagement\_\_Dependencies](maven/pom.xml/pom.xml__depencymanagement__dependencies.md)
   * [maven命令](maven/pom.xml/maven.md)
 
+## 分布式
+
+* [CAP定理](fen-bu-shi/capding-li.md)
+
 ## zookeeper
 
 * [入门demo](zookeeper/demo.md)
