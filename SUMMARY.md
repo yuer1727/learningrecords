@@ -10,6 +10,10 @@
 
 * [docker学习笔记](docker.md)
 
+## linux
+
+* [sudo cd 会报command not found](linux/sudo-cd-hui-bao-command-not-found.md)
+
 ## 操作系统
 
 * [FileSystem](filesystem.md)
