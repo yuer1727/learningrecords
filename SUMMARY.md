@@ -6,6 +6,10 @@
   * [java线上问题排查工具](java.md)
   * [处理下载文件时HTTP头的编码问题（Content-Disposition）](httpcontent-disposition.md)
 
+## javassist
+
+* [javassist初识](javassist/javassistchu-shi.md)
+
 ## docker
 
 * [docker学习笔记](docker.md)
@@ -37,4 +41,8 @@
 ## zookeeper
 
 * [入门demo](zookeeper/demo.md)
+
+## hbase
+
+* [hbase mapreduce](hbase/hbase-mapreduce.md)
 
